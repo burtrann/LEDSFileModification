@@ -1,0 +1,18 @@
+1. All lines need to be in new file.
+2. 
+If TIMEKEEPER_ID = "0034" and has multiple lines per invoices, then add another line with and make the following changes:
+	1. GET SumLineItemTotal1 = SUM(LINE_ITEM_TOTAL) FOR TIMEKEEPER_ID = "0034"
+	2. EXP/FEE/INV_ADJ_TYPE column = "IF"
+	3. LINE_ITEM_DESCRIPTION = "Less Fee Adjustment"
+	4. LINE_ITEM_NUMBER = MAX(LINE_ITEM_NUMBER) + 1
+	5. LINE_ITEM_NUMBER_OF_UNITS = 1	
+	6. LINE_ITEM_ADJUSTMENT_AMOUNT = SumLineItemTotal1 - SumLineItemTotal2 and also on LINE_ITEM_TOTAL
+	7. Set TIMEKEEPER_ID = ""
+	8. Set LINE_ITEM_UNIT_COST = ""
+	9. CLIENT_MATTER_ID = CLIENT_MATTER_ID
+
+EXISTING LINES WITH "0034", for all line items with the same invoice
+	1. CHANGE LINE_ITEM_UNIT_COST = 875.00
+	2. Add .10 to each LINE_ITEM_NUMBER_OF_UNITS (eg. 0.2 to 0.3)
+	3. LINE_ITEM_TOTAL = LINE_ITEM_NUMBER_OF_UNITS * 875.00
+	4. SumLineItemTotal2 = sum(LINE_ITEM_TOTAL)
